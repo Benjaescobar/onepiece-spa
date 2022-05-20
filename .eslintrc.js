@@ -19,5 +19,8 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'react/jsx-max-props-per-line': [1, { maximum: 1, when: 'always' }],
+    'jsx-a11y/alt-text': 'off',
+    'react/button-has-type': 'off',
   },
 };

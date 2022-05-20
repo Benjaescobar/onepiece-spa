@@ -1,0 +1,3 @@
+todo:
+
+- agregar react-query
