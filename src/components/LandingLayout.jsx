@@ -7,6 +7,10 @@ import routes from '../routes';
 function playWarningToast() { toast.error('Aun no se puede jugar :('); }
 
 function LandingLayout() {
+  let AdminLink;
+  if (true) {
+    AdminLink = <Link to={routes.admin}>Admin</Link>;
+  }
   return (
     <div className="flex flex-col w-full h-full">
       <nav className="flex flex-row items-center justify-between w-full px-10 py-6">
@@ -23,6 +27,7 @@ function LandingLayout() {
           <Link to={routes.rules}>Reglas</Link>
           <Link to={routes.credits}>Créditos</Link>
           <Link to={routes.about}>Acerca de</Link>
+          {AdminLink}
         </div>
         <div className="flex flex-row items-center space-x-6 text-xl">
           <Link to={routes.accounts}>Acerca de</Link>
