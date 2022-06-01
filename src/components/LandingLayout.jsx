@@ -33,7 +33,7 @@ function LandingLayout() {
       setlogoutLink(null);
       setPlayLink(null);
     } else {
-      setAdminLink(<Link to={routes.admin}>Dashboard</Link>);
+      setAdminLink(currentUser.isAdmin ? (<Link to={routes.admin}>Dashboard</Link>) : null);
       setLoginLink(null);
       setSignupLink(null);
       setlogoutLink((

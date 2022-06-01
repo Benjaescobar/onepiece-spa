@@ -1,9 +1,10 @@
 import React, {
-  createContext, useEffect, useCallback, useMemo, useState,
+  createContext, useEffect, useCallback, useMemo,
 } from 'react';
 import jwtDecode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import routes from '../routes';
+import useLocalStorage from './useLocalStorage';
 
 let logoutTimer;
 
@@ -11,24 +12,25 @@ export const AuthContext = createContext();
 
 /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 function AuthContextProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, storeUser, clearStoredUser] = useLocalStorage('user');
+  const [sessionExpDate, storeSessionExpDate, clearSessionExpDate] = useLocalStorage('sessionExpiration');
 
-  const [sessionExpDate, setSessionExpDate] = useState();
   const navigate = useNavigate();
 
   const handleUserLogin = (token) => {
     const decoded = jwtDecode(token);
     const expiration = new Date(decoded.exp * 1000);
-    setCurrentUser({
+    storeUser({
       email: decoded.email,
+      isAdmin: decoded.isAdmin,
       token,
     });
-    setSessionExpDate(expiration);
+    storeSessionExpDate(expiration);
   };
 
   const handleUserLogout = () => {
-    setCurrentUser(null);
-    setSessionExpDate();
+    clearStoredUser();
+    clearSessionExpDate();
   };
 
   const handleAutomaticLogout = useCallback(() => {
