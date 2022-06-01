@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -194,7 +195,14 @@ function Signup() {
         </div>
         <div className="flex justify-between">
           <span className="text-indigo-A300">
-            Ya tienes cuenta? <a className='text-blue-500' href={routes.login}>Inicia Sesión</a>
+            Ya tienes cuenta?
+            {' '}
+            <a
+              className="text-blue-500"
+              href={routes.login}
+            >
+              Inicia Sesión
+            </a>
           </span>
         </div>
       </form>

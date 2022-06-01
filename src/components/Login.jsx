@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
@@ -8,7 +9,6 @@ function Login() {
   const navigate = useNavigate();
 
   // States for checking the errors
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -21,13 +21,11 @@ function Login() {
   // Handling the email change
   const handleEmail = (e) => {
     setEmail(e.target.value);
-    setSubmitted(false);
   };
 
   // Handling the password change
   const handlePassword = (e) => {
     setPassword(e.target.value);
-    setSubmitted(false);
   };
 
   const handleSubmit = async (e) => {
@@ -46,7 +44,6 @@ function Login() {
       };
       const response = await axios.post(`${url}/api/sessions`, body);
       handleUserLogin(response.data);
-      setSubmitted(true);
       setError(false);
       navigate(routes.home);
     } catch (err) {
