@@ -22,30 +22,31 @@ function LandingLayout() {
   function handleNavbarButtons() {
     if (currentUser === null) {
       setAdminLink(null);
-      setLoginLink((<a
-        href={routes.login}
-        className="px-6 py-2 text-white rounded rounded-full bg-sky-600 hover:bg-sky-500"
-      >
-        Iniciar Sesión
+      setLoginLink((
+        <a
+          href={routes.login}
+          className="px-6 py-2 text-white rounded rounded-full bg-sky-600 hover:bg-sky-500"
+        >
+          Iniciar Sesión
         </a>));
       setSignupLink(<Link to={routes.signup}>Regístrate</Link>);
       setlogoutLink(null);
       setPlayLink(null);
     } else {
-      setAdminLink(<Link to={routes.admin}>Admin</Link>);
+      setAdminLink(<Link to={routes.admin}>Dashboard</Link>);
       setLoginLink(null);
       setSignupLink(null);
       setlogoutLink((
         <button
           onClick={logOut}
-          className="px-6 py-2 rounded rounded-full bg-gray-200 hover:bg-sky-500"
+          className="px-6 py-2 rounded rounded-full bg-gray-300 hover:bg-gray-100"
         >
           Cerrar Sesión
         </button>));
       setPlayLink((
         <button
           onClick={playWarningToast}
-          className="px-6 py-2 rounded rounded-full bg-sky-600 hover:bg-sky-500"
+          className="px-6 py-2 text-white rounded rounded-full bg-sky-600 hover:bg-sky-500"
         >
           Jugar
         </button>));
@@ -78,7 +79,7 @@ function LandingLayout() {
           <Link to={routes.rules}>Reglas</Link>
           <Link to={routes.credits}>Créditos</Link>
           <Link to={routes.about}>Acerca de</Link>
-          {adminLink}
+          {currentUser ? adminLink : null}
         </div>
         <div className="flex flex-row items-center space-x-6 text-xl">
           {loginLink}

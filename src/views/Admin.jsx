@@ -15,7 +15,9 @@ function Admin() {
     setUsers(responseAll);
   }
   useEffect(() => {
-    getUsers();
+    if (currentUser != null) {
+      getUsers();
+    }
   }, []);
 
   let testUsers;

@@ -16,7 +16,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { currentUser, handleUserLogin } = useAuth();
+  const { handleUserLogin } = useAuth();
 
   // Handling the email change
   const handleEmail = (e) => {
@@ -45,7 +45,6 @@ function Login() {
         password,
       };
       const response = await axios.post(`${url}/api/sessions`, body);
-      console.log(response.data);
       handleUserLogin(response.data);
       setSubmitted(true);
       setError(false);
@@ -59,7 +58,7 @@ function Login() {
       } else if (err.response?.status === 401) {
         setErrorMsg('Wrong Password');
       } else {
-        setErrorMsg('Registration Failed');
+        setErrorMsg('Login Failed');
       }
     }
   };
