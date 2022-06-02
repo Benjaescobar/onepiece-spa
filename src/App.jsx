@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import routes from './routes';
 import Admin from './views/Admin';
 import AuthContextProvider from './contexts/AuthContext';
+import UsersTable from './components/UsersTable';
 
 function App() {
   return (
@@ -30,7 +31,10 @@ function App() {
               <Route path={routes.rules} element={<Rules />} />
               <Route path={routes.about} element={<About />} />
               <Route path={routes.credits} element={<Credits />} />
-              <Route path={routes.admin} element={<Admin />} />
+              <Route path={routes.adminUsers} element={<Admin />} />
+            </Route>
+            <Route path={routes.admin} element={<Admin />}>
+              <Route path={routes.adminUsers} element={<UsersTable />} />
             </Route>
             <Route path={routes.accounts} element={<Accounts />}>
               <Route path={routes.login} element={<Login />} />

@@ -49,13 +49,13 @@ function Login() {
     } catch (err) {
       setError(true);
       if (!err?.response) {
-        setErrorMsg('No Server Response');
+        setErrorMsg('no server response');
       } else if (err.response?.status === 404) {
-        setErrorMsg('Email Doesnt exist');
+        setErrorMsg('email does not exist');
       } else if (err.response?.status === 401) {
-        setErrorMsg('Wrong Password');
+        setErrorMsg('wrong password');
       } else {
-        setErrorMsg('Login Failed');
+        setErrorMsg('login failed');
       }
     }
   };
@@ -112,7 +112,7 @@ function Login() {
             placeholder="*********"
             value={password}
             id="password"
-            type="text"
+            type="password"
             autoComplete="On"
           />
         </div>
