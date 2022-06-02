@@ -58,8 +58,7 @@ function Signup() {
         email,
         password,
       };
-      const response = await axios.post(`${url}/api/users`, body);
-      console.log(response);
+      await axios.post(`${url}/api/users`, body);
       setSubmitted(true);
       setError(false);
       navigate(routes.login);
