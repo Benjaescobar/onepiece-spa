@@ -32,7 +32,7 @@ function UsersTable() {
     const { token } = currentUser;
     try {
       const responseAll = await fetch(`${url}/api/admin/delete-user/${userIdToDelete}`, {
-        method: 'POST',
+        method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }).then((respuesta) => respuesta.json());
       setSuccessMessage((<h1 className="text text-green-400 px-4 py-4 text-left">
