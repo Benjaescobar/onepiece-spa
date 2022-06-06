@@ -11,6 +11,7 @@ function useLocalStorage(key, initialValue = null) {
   });
 
   function setValue(value) {
+    console.log(value);
     localStorage.setItem(key, JSON.stringify(value));
     setStoredValue(value);
   }

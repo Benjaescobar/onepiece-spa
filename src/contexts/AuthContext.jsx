@@ -1,42 +1,43 @@
 import React, {
-  createContext, useEffect, useCallback, useMemo,
+  createContext, useEffect, useMemo, useCallback,
 } from 'react';
 import jwtDecode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import routes from '../routes';
-import useLocalStorage from './useLocalStorage';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 let logoutTimer;
 
 export const AuthContext = createContext();
 
-/* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
 function AuthContextProvider({ children }) {
-  const [currentUser, storeUser, clearStoredUser] = useLocalStorage('user');
+  const [currentUser, setCurrentUser, clearCurrentUser] = useLocalStorage('user');
   const [sessionExpDate, storeSessionExpDate, clearSessionExpDate] = useLocalStorage('sessionExpiration');
 
   const navigate = useNavigate();
 
-  const handleUserLogin = (token) => {
+  function handleUserLogin(token) {
     const decoded = jwtDecode(token);
     const expiration = new Date(decoded.exp * 1000);
-    storeUser({
+    setCurrentUser({
       email: decoded.email,
       isAdmin: decoded.isAdmin,
       token,
     });
     storeSessionExpDate(expiration);
-  };
+  }
 
-  const handleUserLogout = () => {
-    clearStoredUser();
+  function handleUserLogout() {
+    clearCurrentUser();
     clearSessionExpDate();
-  };
+  }
 
-  const handleAutomaticLogout = useCallback(() => {
-    handleUserLogin();
+  function handleAutomaticLogout() {
+    handleUserLogout();
     navigate(routes.login);
-  }, [navigate]);
+  }
+
+  const isAuthed = useCallback(() => !!currentUser);
 
   useEffect(() => {
     if (currentUser && sessionExpDate) {
@@ -47,10 +48,12 @@ function AuthContextProvider({ children }) {
     } else {
       clearTimeout(logoutTimer);
     }
-  }, [currentUser, sessionExpDate, handleAutomaticLogout]);
+  }, [currentUser, sessionExpDate]);
 
   const userStatus = useMemo(
-    () => ({ currentUser, handleUserLogin, handleUserLogout }),
+    () => ({
+      isAuthed, currentUser, handleUserLogin, handleUserLogout,
+    }),
     [currentUser, handleUserLogin, handleUserLogout],
   );
 
