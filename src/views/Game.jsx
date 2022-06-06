@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import {
+  useCallback, useEffect, useState, useMemo,
+} from 'react';
 import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -10,22 +12,24 @@ const CELLS = Array.from({ length: 42 });
 export default function Game() {
   const { id } = useParams();
 
-  const refreshGameState = useCallback(() => {
-    toast.success('polling');
+  const [game, setGame] = useState({});
 
+  const players = useMemo(() => game.players || [], [game]);
+
+  const refreshGameState = useCallback(() => {
     gamesApi.getState(id)
       .then((response) => {
-        console.log(response);
+        setGame(response);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.error('Hubo un error cargando el estado del juego');
       });
-  }, []);
+  }, [game]);
 
   useEffect(() => {
     const pollingInterval = setInterval(() => {
       refreshGameState();
-    }, 30000);
+    }, 1000);
 
     return () => clearInterval(pollingInterval);
   }, []);
@@ -37,9 +41,21 @@ export default function Game() {
           {CELLS.map((_, index) => (
             <div
               key={`cell-${index}`}
-              className="w-full h-24 text-black bg-blue-400 border w-36"
+              className="relative flex w-full h-24 text-black bg-blue-400 border w-36"
             >
-              {index + 1}
+              <span className="absolute top-0.5 left-0.5">
+                {index + 1}
+              </span>
+              <div className="flex flex-row self-end p-2 space-x-2">
+                {players.map((player) => (player.position === index ? (
+                  <div
+                    key={`player-${player.id}`}
+                    className="flex items-center justify-center w-8 h-8 bg-red-500"
+                  >
+                    {player.user.firstName}
+                  </div>
+                ) : null))}
+              </div>
             </div>
           ))}
         </div>

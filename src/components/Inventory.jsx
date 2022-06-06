@@ -61,7 +61,7 @@ export default function Inventory({
           />
         </button>
       </div>
-      <div className="flex flex-col mt-8 ml-2 space-y-4">
+      <div className="flex flex-col mt-8 ml-2 space-y-4 h-[200px] bg-gray-50 p-2 rounded-lg overflow-y-scroll">
         {fruits.map((fruit) => (
           <div
             key={`fruit-${fruit.id}`}

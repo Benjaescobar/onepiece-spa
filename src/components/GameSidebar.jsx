@@ -16,7 +16,7 @@ export default function GameSidebar() {
   const handleDiceRoll = useCallback(() => {
     gamesApi.rollDice(gameID)
       .then((response) => {
-        console.log(response);
+        toast.success('Dado lanzado.');
       })
       .catch((err) => {
         if (err.response?.status === 403) {
@@ -28,7 +28,7 @@ export default function GameSidebar() {
   const handleEndTurn = useCallback(() => {
     gamesApi.endTurn(gameID)
       .then((response) => {
-        console.log(response);
+        toast.success('Turno terminado.');
       })
       .catch((err) => {
         if (err.response?.status === 403) {
@@ -62,7 +62,6 @@ export default function GameSidebar() {
         if (err.response?.data === 'not_enough_money') {
           toast.error('No tienes suficiente dinero :(');
         }
-        console.log(err);
       });
   }, []);
 
@@ -81,7 +80,6 @@ export default function GameSidebar() {
         if (err.response?.data === 'not_enough_money') {
           toast.error('No tienes suficiente dinero :(');
         }
-        console.log(err);
       });
   }, []);
 
@@ -103,8 +101,8 @@ export default function GameSidebar() {
           fruits: p.fruits.filter((f) => f.id !== fruit.id),
         }));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.error('Hubo un error vendiendo la fruta :(');
       });
   }, []);
 
@@ -118,8 +116,8 @@ export default function GameSidebar() {
           consumables: p.consumables.filter((c) => c.id !== consumable.id),
         }));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.error('Hubo un error vendiendo el consumible :(');
       });
   }, []);
 
@@ -140,8 +138,8 @@ export default function GameSidebar() {
           fruits: p.fruits.filter((f) => f.id !== fruit.id),
         }));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.error('Hubo un error consumiendo la fruta :(');
       });
   }, []);
 
@@ -154,8 +152,8 @@ export default function GameSidebar() {
           consumables: p.consumables.filter((c) => c.id !== consumable.id),
         }));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        toast.error('Hubo un error consumiendo el consumible :(');
       });
   }, []);
 
@@ -171,11 +169,10 @@ export default function GameSidebar() {
   const refreshLogs = useCallback(() => {
     gamesApi.getLogs(gameID)
       .then((response) => {
-        console.log(response, typeof response);
         setLogs(response);
       })
       .catch((err) => {
-        console.log(err, 'logs');
+        toast.error('Hubo un error actualizando los logs :(');
       });
   }, []);
 
@@ -219,7 +216,7 @@ export default function GameSidebar() {
           onClick={handleEndTurn}
         />
       </div>
-      <div className="flex flex-col h-64 p-4 space-y-2 overflow-y-scroll bg-gray-100 divide-y divide-gray-200 rounded-lg">
+      <div className="flex flex-col w-full h-64 p-4 space-y-2 overflow-y-scroll bg-gray-100 divide-y divide-gray-200 rounded-lg">
         {logs.map((log) => (
           (
             <span

@@ -6,6 +6,10 @@ import piratePng from '../assets/images/pirate.png';
 
 export default function Tripulation({ player }) {
   const pirates = useMemo(() => player?.pirates || [], []);
+  const strength = useMemo(
+    () => pirates.reduce((pirate, currentValue) => pirate.strength + currentValue, player.strength),
+    [player],
+  );
 
   return (
     <div className="flex flex-col space-y-4">
@@ -24,9 +28,15 @@ export default function Tripulation({ player }) {
               className="w-12 h-12"
             />
             <span className="font-medium">{pirate.name}</span>
+            <span>{pirate.strength}</span>
           </div>
         ))}
       </div>
+      <span className="text-sm font-medium text-center text-gray-700">
+        Fuerza total:
+        {' '}
+        {strength}
+      </span>
     </div>
   );
 }
