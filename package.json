@@ -7,11 +7,18 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "classnames": "^2.3.1",
     "eslint": "^7.32.0 || ^8.2.0",
+    "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-hot-toast": "^2.2.0",
-    "react-router-dom": "6"
+    "react-router-dom": "6",
+    "react-svg": "^15.0.2",
+    "reactjs-popup": "^2.0.5",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.0",

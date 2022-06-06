@@ -17,7 +17,7 @@ function Home() {
             Igual de entretenido pero sin ser tan largo.
           </span>
           <Link
-            to={routes.newGame}
+            to={routes.games}
             className="self-start px-12 py-2 mt-12 text-xl font-semibold text-white transform rounded rounded-full bg-sky-600 hover:bg-sky-500 hover:scale-105"
           >
             Jugar
