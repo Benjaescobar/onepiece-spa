@@ -22,5 +22,11 @@ module.exports = {
     'react/jsx-max-props-per-line': [1, { maximum: 1, when: 'always' }],
     'jsx-a11y/alt-text': 'off',
     'react/button-has-type': 'off',
+    'react/prop-types': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      1, { required: { some: ['nesting', 'id'] } },
+    ],
+    'react/jsx-props-no-spreading': 'off',
+    'react/no-array-index-key': 'off',
   },
 };

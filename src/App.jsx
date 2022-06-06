@@ -8,14 +8,13 @@ import Rules from './views/Rules';
 import About from './views/About';
 import Credits from './views/Credits';
 import Game from './views/Game';
-import Accounts from './views/Accounts';
-
+import RoomLayout from './views/RoomLayout';
 import Footer from './components/Footer';
 import routes from './routes';
 import Admin from './views/Admin';
 import AuthContextProvider from './contexts/AuthContext';
-import UsersTable from './components/UsersTable';
-import GamesTable from './components/GamesTable';
+import AuthenticatedRoute from './components/AuthenticatedRoute';
+import Room from './views/Room';
 
 function App() {
   return (
@@ -28,17 +27,55 @@ function App() {
               path={routes.home}
               element={<LandingLayout />}
             >
-              <Route index element={<Home />} />
-              <Route path={routes.rules} element={<Rules />} />
-              <Route path={routes.about} element={<About />} />
-              <Route path={routes.credits} element={<Credits />} />
-              <Route path={routes.admin} element={<Admin />} />
+              <Route
+                index
+                element={<Home />}
+              />
+              <Route
+                path={routes.rules}
+                element={<Rules />}
+              />
+              <Route
+                path={routes.about}
+                element={<About />}
+              />
+              <Route
+                path={routes.credits}
+                element={<Credits />}
+              />
+              <Route
+                path={routes.admin}
+                element={<Admin />}
+              />
             </Route>
-            <Route path={routes.accounts} element={<Accounts />}>
-              <Route path={routes.login} element={<Login />} />
-              <Route path={routes.signup} element={<Signup />} />
+
+            <Route element={<RoomLayout />}>
+              <Route
+                path={routes.login}
+                element={<Login />}
+              />
+              <Route
+                path={routes.signup}
+                element={<Signup />}
+              />
+              <Route
+                element={<AuthenticatedRoute />}
+              >
+                <Route
+                  path={routes.games}
+                  element={<Room />}
+                />
+              </Route>
             </Route>
-            <Route path={routes.game} element={<Game />} />
+
+            <Route
+              element={<AuthenticatedRoute />}
+            >
+              <Route
+                path={routes.game}
+                element={<Game />}
+              />
+            </Route>
           </Routes>
         </div>
         <Footer />

@@ -39,7 +39,7 @@ function LandingLayout() {
       setlogoutLink((
         <button
           onClick={logOut}
-          className="px-6 py-2 rounded rounded-full bg-gray-300 hover:bg-gray-100"
+          className="px-6 py-2 bg-gray-300 rounded rounded-full hover:bg-gray-100"
         >
           Cerrar Sesión
         </button>));

@@ -9,5 +9,8 @@ export default {
   accounts: '/accounts',
   login: '/accounts/login',
   signup: '/accounts/signup',
-  newGame: '/game/new',
+  newGame: '/games/new',
+  JoinGame: '/games/join',
+  games: '/games',
+  game: '/games/:id',
 };
