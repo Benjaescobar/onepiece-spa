@@ -8,9 +8,6 @@ import gamesApi from '../api/games';
 import GameSidebar from '../components/GameSidebar';
 import constants from '../constants';
 
-// const CELLS = Array.from({ length: 42 });
-const { CELLS } = constants.CELLS;
-
 export default function Game() {
   const { id } = useParams();
 
