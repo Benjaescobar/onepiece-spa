@@ -7,10 +7,14 @@ import toast from 'react-hot-toast';
 import gamesApi from '../api/games';
 import GameSidebar from '../components/GameSidebar';
 import constants from '../constants';
+import RulesModal from '../components/RulesModal';
+
+const CELLS = Array.from({ length: 42 });
 
 export default function Game() {
   const { id } = useParams();
 
+  const [rulesModalOpen, setRulesModalOpen] = useState(false);
   const [game, setGame] = useState({});
 
   const players = useMemo(() => game.players || [], [game]);
@@ -35,8 +39,17 @@ export default function Game() {
 
   return (
     <div className="flex flex-row w-full">
-      <div className="flex items-center justify-center flex-grow flex-shrink-0 min-h-screen p-12 bg-gray-100">
-        <div className="grid grid-cols-6 bg-blue-400 shadow-xl">
+      {rulesModalOpen ? (
+        <RulesModal close={() => setRulesModalOpen(false)} />
+      ) : null}
+      <div className="flex flex-col items-center justify-center flex-grow flex-shrink-0 min-h-screen p-12 space-y-2 bg-gray-100">
+        <div className="relative grid grid-cols-6 bg-blue-400 shadow-xl">
+          <button
+            onClick={() => setRulesModalOpen(true)}
+            className="absolute right-0 px-4 py-1 text-white bg-blue-400 rounded-lg hover:bg-blue-500 -top-12"
+          >
+            Ver reglas
+          </button>
           {constants.CELLS.map((value, index) => (
             <div
               key={`cell-${index}`}
