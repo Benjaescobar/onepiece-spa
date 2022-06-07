@@ -125,6 +125,17 @@ export default function Room() {
               />
             ))}
           </div>
+          <div className="flex flex-col self-center mt-12 space-y-2">
+            <span className="text-md text-center font-medium">
+              Code:
+            </span>
+            <input
+              name="code"
+              className="border bg-gradient-to-r from-purple-400 to-pink-400 text-md rounded-lg block text-center w-full p-2.5"
+              value={game.code}
+              readOnly
+            />
+          </div>
           <MainBtn
             type="submit"
             label="Empezar juego"
