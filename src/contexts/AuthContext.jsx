@@ -30,6 +30,7 @@ function AuthContextProvider({ children }) {
   function handleUserLogout() {
     clearCurrentUser();
     clearSessionExpDate();
+    navigate(routes.home);
   }
 
   function handleAutomaticLogout() {
