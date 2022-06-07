@@ -18,4 +18,10 @@ export default {
       url: `/users/${id}`,
     });
   },
+  delete(id) {
+    return api({
+      method: 'delete',
+      url: `/users/${id}`,
+    });
+  },
 };
