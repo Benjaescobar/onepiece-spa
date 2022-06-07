@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
+import usersApi from '../api/users';
 import useAuth from '../hooks/useAuth';
 
 function UsersTable() {
@@ -18,23 +19,14 @@ function UsersTable() {
   // USER FETCH
   const [users, setUsers] = useState(null);
   async function getUsers() {
-    const url = 'http://localhost:3001';
-    const { token } = currentUser;
-    const responseAll = await fetch(`${url}/api/admin/users`, {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((respuesta) => respuesta.json());
+    const responseAll = await usersApi.get('');
+    console.log(responseAll);
     setUsers(responseAll);
   }
 
   async function deleteUser() {
-    const url = 'http://localhost:3001';
-    const { token } = currentUser;
     try {
-      const responseAll = await fetch(`${url}/api/admin/delete-user/${userIdToDelete}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` },
-      }).then((respuesta) => respuesta.json());
+      const responseAll = await usersApi.delete(userIdToDelete);
       setSuccessMessage((<h1 className="text text-green-400 px-4 py-4 text-left">
         Succesfully deleted user
         {' '}
@@ -42,7 +34,7 @@ function UsersTable() {
         {' '}
         {responseAll.lastName}
         !
-                         </h1>));
+      </h1>));
       console.log(responseAll);
       closeModal();
       window.location.reload();
@@ -52,7 +44,7 @@ function UsersTable() {
         Could not delete
         {' '}
         {userNameToDelete}
-                         </h1>));
+      </h1>));
       closeModal();
     }
   }
