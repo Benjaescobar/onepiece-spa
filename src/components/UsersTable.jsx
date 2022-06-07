@@ -37,7 +37,7 @@ function UsersTable() {
       </h1>));
       console.log(responseAll);
       closeModal();
-      window.location.reload();
+      getUsers();
     } catch (err) {
       console.log(err);
       setSuccessMessage((<h1 className="text text-red-400 px-4 py-4 text-left">
