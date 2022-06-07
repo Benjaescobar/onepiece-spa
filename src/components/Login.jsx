@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import routes from '../routes';
 import useAuth from '../hooks/useAuth';
@@ -18,7 +18,7 @@ const LoginSchema = Yup.object().shape({
 export default function Login() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { handleUserLogin } = useAuth();
+  const { currentUser, handleUserLogin } = useAuth();
 
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +28,6 @@ export default function Login() {
     sessionsApi.create(email, password)
       .then((jwt) => {
         handleUserLogin(jwt);
-        navigate(state?.path || routes.games);
       })
       .catch((err) => {
         if (err.response.status === 404) {
@@ -42,6 +41,12 @@ export default function Login() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate(currentUser.isAdmin ? routes.admin : (state?.path || routes.games));
+    }
+  }, [currentUser]);
 
   return (
     <div className="flex flex-col w-full space-y-8">

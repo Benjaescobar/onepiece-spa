@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState, useEffect } from 'react';
+import gamesApi from '../api/games';
 import useAuth from '../hooks/useAuth';
 
 function GamesTable() {
@@ -9,12 +10,7 @@ function GamesTable() {
   // Games FETCH
   const [games, setGames] = useState(null);
   async function getGames() {
-    const url = 'http://localhost:3001';
-    const { token } = currentUser;
-    const responseAll = await fetch(`${url}/api/admin/games`, {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((respuesta) => respuesta.json());
+    const responseAll = await gamesApi.get('');
     setGames(responseAll);
   }
 
