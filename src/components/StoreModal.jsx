@@ -62,6 +62,10 @@ export default function StoreModal({ close, buy, money }) {
                               className="stroke-current w-7 h-7"
                             />
                             <span>{fruit.name}</span>
+                            <span>
+                              $
+                              {fruit.price}
+                            </span>
                             <button
                               onClick={() => setItem(fruit)}
                               className="p-1 text-sm bg-green-300 rounded-lg hover:bg-green-200"
@@ -88,6 +92,10 @@ export default function StoreModal({ close, buy, money }) {
                               className="stroke-current w-7 h-7"
                             />
                             <span>{consumable.name}</span>
+                            <span>
+                              $
+                              {consumable.price}
+                            </span>
                             <button
                               onClick={() => setItem(consumable)}
                               className="p-1 text-sm bg-green-300 rounded-lg hover:bg-green-200"
