@@ -9,6 +9,18 @@ import GameSidebar from '../components/GameSidebar';
 import constants from '../constants';
 import RulesModal from '../components/RulesModal';
 
+import strawhats from '../assets/images/pirates/strawhats-pirates.webp';
+import heart from '../assets/images/pirates/heart-pirates.webp';
+import kid from '../assets/images/pirates/kid-pirates.webp';
+import buggy from '../assets/images/pirates/buggy-pirates.webp';
+
+const pirateImages = {
+  'Monkey D. Luffy': strawhats,
+  'Trafalgar D. Law': heart,
+  'Eustass Kidd': kid,
+  'Buggy el payaso': buggy,
+};
+
 const CELLS = Array.from({ length: 42 });
 
 export default function Game() {
@@ -43,6 +55,19 @@ export default function Game() {
         <RulesModal close={() => setRulesModalOpen(false)} />
       ) : null}
       <div className="flex flex-col items-center justify-center flex-grow flex-shrink-0 min-h-screen p-12 space-y-2 bg-gray-100">
+        {players.map((player) => (player.id === game.currentTurnPlayerId ? (
+          <div
+            key={player.captain}
+          >
+            <span className="text-medium">Current Player:</span>
+            <img
+              src={pirateImages[player.captain]}
+              alt=""
+              className="flex items-center rounded-full justify-center w-8 h-8"
+            />
+            {player.captain}
+          </div>
+        ) : null))}
         <div className="relative grid grid-cols-6 bg-blue-400 shadow-xl">
           <button
             onClick={() => setRulesModalOpen(true)}
@@ -62,10 +87,13 @@ export default function Game() {
               <div className="flex flex-row self-end p-2 space-x-2">
                 {players.map((player) => (player.position === index ? (
                   <div
-                    key={`player-${player.id}`}
-                    className="flex items-center justify-center w-8 h-8 bg-red-500"
+                    key={player.captain}
                   >
-                    {player.user.firstName}
+                    <img
+                      src={pirateImages[player.captain]}
+                      alt=""
+                      className="flex items-center rounded-full justify-center w-8 h-8"
+                    />
                   </div>
                 ) : null))}
               </div>
