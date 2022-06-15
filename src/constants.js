@@ -4,6 +4,7 @@ import kid from './assets/images/pirates/kid-pirates.webp';
 import buggy from './assets/images/pirates/buggy-pirates.webp';
 import jimbei from './assets/images/pirates/jimbei.png';
 
+import evilFruitIcon from './assets/icons/evil-fruit.svg';
 import evilFruit from './assets/images/cells_assets/evil-fruit.png';
 import pirate from './assets/images/cells_assets/pirate-cell.png';
 import island from './assets/images/cells_assets/island.jpeg';
@@ -166,5 +167,8 @@ export default {
     SHANKS: redhair,
     BIGMOM: bigmom,
     END: end,
+  },
+  ICONS: {
+    EVILFRUIT: evilFruitIcon,
   },
 };
