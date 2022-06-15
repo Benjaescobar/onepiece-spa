@@ -1,3 +1,20 @@
+import strawhats from './assets/images/pirates/strawhats-pirates.webp';
+import heart from './assets/images/pirates/heart-pirates.webp';
+import kid from './assets/images/pirates/kid-pirates.webp';
+import buggy from './assets/images/pirates/buggy-pirates.webp';
+import jimbei from './assets/images/pirates/jimbei.png';
+
+import evilFruit from './assets/images/cells_assets/evil-fruit.png';
+import pirate from './assets/images/cells_assets/pirate-cell.png';
+import island from './assets/images/cells_assets/island.jpeg';
+import chest from './assets/images/cells_assets/chest-cell.png';
+import card from './assets/images/cells_assets/card.png';
+import kaido from './assets/images/cells_assets/kaido-pirates.webp';
+import blackbeard from './assets/images/cells_assets/blackbeard-pirates.png';
+import redhair from './assets/images/cells_assets/redhair-pirates.png';
+import bigmom from './assets/images/cells_assets/bigmom-pirates.png';
+import end from './assets/images/cells_assets/laugh-tale.png';
+
 export default {
   CONSUMABLES: [
     {
@@ -125,10 +142,29 @@ export default {
     'CARD',
     'PIRATE',
     'PIRATE',
-    'YONKO',
-    'YONKO',
-    'YONKO',
-    'YONKO',
+    'KAIDO',
+    'BIGMOM',
+    'SHANKS',
+    'BLACKBEARD',
     'END',
   ],
+  PIRATEIMAGES: {
+    'Monkey D. Luffy': strawhats,
+    'Trafalgar D. Law': heart,
+    'Eustass Kidd': kid,
+    'Buggy el payaso': buggy,
+    Jimbei: jimbei,
+  },
+  CELLASSETS: {
+    FRUIT: evilFruit,
+    PIRATE: pirate,
+    ISLAND: island,
+    CHEST: chest,
+    CARD: card,
+    KAIDO: kaido,
+    BLACKBEARD: blackbeard,
+    SHANKS: redhair,
+    BIGMOM: bigmom,
+    END: end,
+  },
 };

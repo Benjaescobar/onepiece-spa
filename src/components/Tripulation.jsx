@@ -2,19 +2,8 @@ import { useMemo } from 'react';
 import { ReactSVG } from 'react-svg';
 
 import usersSvg from '../assets/icons/users.svg';
-import piratePng from '../assets/images/pirate.png';
 
-import strawhats from '../assets/images/pirates/strawhats-pirates.webp';
-import heart from '../assets/images/pirates/heart-pirates.webp';
-import kid from '../assets/images/pirates/kid-pirates.webp';
-import buggy from '../assets/images/pirates/buggy-pirates.webp';
-
-const pirateImages = {
-  'Monkey D. Luffy': strawhats,
-  'Trafalgar D. Law': heart,
-  'Eustass Kidd': kid,
-  'Buggy el payaso': buggy,
-};
+import constants from '../constants';
 
 export default function Tripulation({ player }) {
   const pirates = useMemo(() => player?.pirates || [], []);
@@ -32,9 +21,9 @@ export default function Tripulation({ player }) {
         />
         <span className="text-xl font-medium">Tripulación</span>
       </div>
-      <div className="flex items-center justify-between h-12 w-28 rounded-lg">
+      <div className="flex items-center justify-between h-12 w-20 rounded-lg">
         <img
-          src={pirateImages[player.captain]}
+          src={constants.PIRATEIMAGES[player.captain]}
           className="h-full py-2 pr-4 ml-2"
         />
         <div className="flex flex-col">
@@ -45,13 +34,13 @@ export default function Tripulation({ player }) {
         {pirates.map((pirate) => (
           <div
             key={pirate.id}
-            className="flex items-center justify-between h-12 w-28 rounded-lg"
+            className="flex items-center justify-between h-12 w-20 rounded-lg"
           >
             <img
-              src={pirateImages[player.captain]}
-              className="h-full py-2 pr-4 ml-2"
+              src={constants.PIRATEIMAGES[pirate.name]}
+              className="h-full py-2 pr-4 ml-2 rounded-full"
             />
-            <div className="flex">
+            <div className="flex flex-col">
               <span className="text-xs">{pirate.name}</span>
               <p className="text-xs">{pirate.strength}</p>
             </div>
