@@ -12,37 +12,29 @@ import Tripulation from './Tripulation';
 
 export default function GameSidebar() {
   const { id: gameID } = useParams();
-  const [diceRolled, setDiceRolled] = useState(false);
 
   const handleDiceRoll = useCallback(() => {
     gamesApi.rollDice(gameID)
       .then((response) => {
         toast.success('Dado lanzado.');
-        setDiceRolled(true);
       })
       .catch((err) => {
         if (err.response?.status === 403) {
           toast.error('No es tu turno o ya tiraste el dado.');
-          setDiceRolled(true);
         }
       });
   }, []);
 
   const handleEndTurn = useCallback(() => {
-    if (!diceRolled) {
-      toast.error('Debes lanzar el dado.');
-    } else {
-      gamesApi.endTurn(gameID)
-        .then((response) => {
-          toast.success('Turno terminado.');
-          setDiceRolled(false);
-        })
-        .catch((err) => {
-          if (err.response?.status === 403) {
-            toast.error('No es tu turno');
-          }
-        });
-    }
+    gamesApi.endTurn(gameID)
+      .then((response) => {
+        toast.success('Turno terminado.');
+      })
+      .catch((err) => {
+        if (err.response?.status === 403) {
+          toast.error('No es tu turno');
+        }
+      });
   }, []);
 
   const [player, setPlayer] = useState({});
@@ -220,7 +212,7 @@ export default function GameSidebar() {
         <MainBtn
           label="Terminar turno"
           variant="secondary"
-          classes={(diceRolled ? 'w-full' : 'opacity-40 w-full')}
+          classes="w-full"
           onClick={handleEndTurn}
         />
       </div>
