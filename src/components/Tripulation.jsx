@@ -10,9 +10,8 @@ import meraPng from '../assets/images/mera.png';
 import usersSvg from '../assets/icons/users.svg';
 
 import constants from '../constants';
-import fruitsApi from '../api/fruits';
 
-export default function Tripulation({ player }) {
+export default function Tripulation({ player, consume }) {
   const pirates = useMemo(() => player?.pirates || [], [player?.pirates]);
   const strength = useMemo(
     () => pirates.reduce((pirate, currentValue) => pirate.strength + currentValue, player.strength),
@@ -36,7 +35,7 @@ export default function Tripulation({ player }) {
 
   const handleFruitConsume = useCallback((fruit) => {
     try {
-      fruitsApi.consume(fruit, idPirateSelected);
+      consume(fruit, idPirateSelected);
       toast.success(`Le diste la fruta ${fruit.name} a ${pirateSelected}`);
       closeModal();
     } catch {

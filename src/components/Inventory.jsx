@@ -86,12 +86,6 @@ export default function Inventory({
                     {fruit.price}
                   </span>
                 </button>
-                <button
-                  onClick={() => consume(fruit, 'fruit')}
-                  className="text-xs text-black hover:text-gray-700"
-                >
-                  consumir
-                </button>
               </div>
             </div>
           </div>
@@ -121,7 +115,7 @@ export default function Inventory({
                   </span>
                 </button>
                 <button
-                  onClick={() => consume(consumable, 'consumable')}
+                  onClick={() => consume(consumable)}
                   className="text-xs text-black hover:text-gray-700"
                 >
                   Ocupar
