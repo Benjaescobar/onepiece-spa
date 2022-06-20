@@ -42,6 +42,7 @@ export default function Inventory({
           close={() => setStoreOpen(false)}
           buy={buy}
           money={player.money}
+          position={player.position}
         />
       ) : null}
 

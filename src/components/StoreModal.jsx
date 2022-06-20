@@ -10,8 +10,10 @@ import constants from '../constants';
 const fruits = constants.FRUITS.map((fruit) => ({ ...fruit, type: 'fruit' }));
 const consumables = constants.CONSUMABLES.map((consumable) => ({ ...consumable, type: 'consumable' }));
 
-export default function StoreModal({ close, buy, money }) {
+export default function StoreModal({ close, buy, money, position }) {
   const [item, setItem] = useState(null);
+  const cell = constants.CELLS[position];
+  const onIsland = (cell === 'ISLAND');
 
   return (
     <div
@@ -114,10 +116,10 @@ export default function StoreModal({ close, buy, money }) {
               <button
                 type="button"
                 onClick={() => buy(item)}
-                disabled={!item}
+                disabled={!item || !onIsland}
                 className={classNames(
                   'inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium border border-transparent rounded-md shadow-sm focus:outline-none',
-                  item ? 'bg-green-400 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-white hover:bg-green-500' : 'bg-white text-black',
+                  item && onIsland ? 'bg-green-400 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-white hover:bg-green-500' : 'bg-white text-black',
                 )}
               >
                 Comprar
