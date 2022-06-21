@@ -129,8 +129,8 @@ export default function GameSidebar() {
     }
   }, []);
 
-  const consumeFruit = useCallback((fruit) => {
-    fruitsApi.consume(gameID, fruit.id)
+  const consumeFruit = useCallback((fruit, idPirate) => {
+    fruitsApi.consume(gameID, fruit.id, idPirate)
       .then(() => {
         toast.success(`${fruit.name} consumida!`);
         setPlayer((p) => ({
@@ -155,14 +155,6 @@ export default function GameSidebar() {
       .catch(() => {
         toast.error('Hubo un error consumiendo el consumible :(');
       });
-  }, []);
-
-  const handleConsume = useCallback((item, type) => {
-    if (type === 'fruit') {
-      consumeFruit(item);
-    } else if (type === 'consumable') {
-      consumeConsumable(item);
-    }
   }, []);
 
   const [logs, setLogs] = useState([]);
@@ -191,13 +183,16 @@ export default function GameSidebar() {
   return (
     <div className="flex flex-col w-[250px] items-start justify-between flex-shrink-0 p-6 space-y-6">
       <div>
-        <Tripulation player={player} />
+        <Tripulation
+          player={player}
+          consume={consumeFruit}
+        />
       </div>
       <Inventory
         buy={handleBuy}
         player={player}
         sell={handleSell}
-        consume={handleConsume}
+        consume={consumeConsumable}
       />
       <div>
         acciones

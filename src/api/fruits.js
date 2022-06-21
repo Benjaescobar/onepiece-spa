@@ -20,10 +20,11 @@ export default {
       url: `/games/${gameId}/fruits/${id}/sell`,
     });
   },
-  consume(gameId, id) {
+  consume(gameId, id, pirateId) {
     return api({
       method: 'post',
       url: `/games/${gameId}/fruits/${id}/consume`,
+      data: { pirateId },
     });
   },
 };
