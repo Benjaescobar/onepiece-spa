@@ -40,6 +40,10 @@ export default function Room() {
       });
   });
 
+  const handleEnterGame = useCallback(({ id }, { setErrors }) => {
+    setJoinLoading(true);
+    navigate(`${routes.games}/${id}`);
+  });
   const [createLoading, setCreateLoading] = useState(false);
   const handleCreate = useCallback(() => {
     setCreateLoading(true);
@@ -182,6 +186,25 @@ export default function Room() {
               loading={createLoading}
             />
           </div>
+          <Formik
+            initialValues={{ id: '' }}
+            onSubmit={handleEnterGame}
+          >
+            {() => (
+              <Form className="flex flex-col w-full space-y-4">
+                <ShortTextInput
+                  name="id"
+                  label="Ingresa a un juego existente (id)"
+                />
+                <MainBtn
+                  type="submit"
+                  label="Ingresar"
+                  classes="w-full"
+                  loading={joinLoading}
+                />
+              </Form>
+            )}
+          </Formik>
         </div>
       )}
     </div>

@@ -1,8 +1,9 @@
 import {
   useCallback, useEffect, useState, useMemo,
 } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import routes from '../routes';
 
 import gamesApi from '../api/games';
 import GameSidebar from '../components/GameSidebar';
@@ -68,6 +69,12 @@ export default function Game() {
           >
             Ver reglas
           </button>
+          <Link
+            to={routes.games}
+            className="absolute right-40 px-4 py-1 text-white bg-blue-400 rounded-lg hover:bg-blue-500 -top-12"
+          >
+            Volver
+          </Link>
           {constants.CELLS.map((value, index) => (
             <div
               key={`cell-${index}`}
