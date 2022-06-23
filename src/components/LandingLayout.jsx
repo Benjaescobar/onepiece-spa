@@ -23,12 +23,12 @@ function LandingLayout() {
     if (currentUser === null) {
       setAdminLink(null);
       setLoginLink((
-        <a
-          href={routes.login}
+        <Link
+          to={routes.login}
           className="px-6 py-2 text-white rounded rounded-full bg-sky-600 hover:bg-sky-500"
         >
           Iniciar Sesión
-        </a>));
+        </Link>));
       setSignupLink(<Link to={routes.signup}>Regístrate</Link>);
       setlogoutLink(null);
       setPlayLink(null);
@@ -44,12 +44,12 @@ function LandingLayout() {
           Cerrar Sesión
         </button>));
       setPlayLink((
-        <button
-          onClick={playWarningToast}
+        <Link
+          to={routes.games}
           className="px-6 py-2 text-white rounded rounded-full bg-sky-600 hover:bg-sky-500"
         >
           Jugar
-        </button>));
+        </Link>));
     }
   }
 
